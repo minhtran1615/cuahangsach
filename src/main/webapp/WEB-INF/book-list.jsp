@@ -117,7 +117,11 @@
 <h2>📚 DANH SÁCH TRUYỆN TRONG THƯ VIỆN</h2>
 
 <div class="top-bar">
-    <a href="<%=request.getContextPath()%>/addBook">➕ Thêm truyện mới</a>
+    
+    <div>
+        <a href="<%=request.getContextPath()%>/customers">👤 Quản lý khách hàng</a>
+        <a href="<%=request.getContextPath()%>/addBook">➕ Thêm truyện mới</a>
+    </div>
 
     <form class="search-box" action="<%=request.getContextPath()%>/searchBook" method="get">
         <input type="text" name="keyword" placeholder="Nhập tên truyện...">

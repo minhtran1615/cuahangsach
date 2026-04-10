@@ -15,6 +15,8 @@ public class BookListServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	
+    	System.out.println("ĐÃ VÀO /books servlet");
 
         BookDAO dao = new BookDAO();
         List<Book> list = dao.getAllBooks();
@@ -23,3 +25,5 @@ public class BookListServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/book-list.jsp").forward(req, resp);
     }
 }
+
+//them danh sach khach hang gom : ten,ngay dk ,ma kh ,sdt

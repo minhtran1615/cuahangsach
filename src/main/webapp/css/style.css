@@ -33,3 +33,7 @@ button {
 button:hover {
     background: #0056b3;
 }
+.top-bar div a {
+    margin-right: 10px;
+    display: inline-block;
+}

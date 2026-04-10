@@ -12,32 +12,40 @@ import model.Book;
 public class BookDAO {
 
     // Lấy tất cả truyện
-    public List<Book> getAllBooks() {
-        List<Book> list = new ArrayList<>();
+	public List<Book> getAllBooks() {
+	    List<Book> list = new ArrayList<>();
 
-        try {
-            Connection conn = DBConnection.getConnection();
-            String sql = "SELECT * FROM books";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+	    try {
+	        Connection conn = DBConnection.getConnection();
 
-            while (rs.next()) {
-                Book b = new Book();
-                b.setId(rs.getInt("id"));
-                b.setTitle(rs.getString("title"));
-                b.setAuthor(rs.getString("author"));
-                b.setCategory(rs.getString("category"));
-                b.setQuantity(rs.getInt("quantity"));
-                list.add(b);
-            }
+	        System.out.println("Database đang dùng: " + conn.getCatalog());
 
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+	        String sql = "SELECT * FROM books";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
 
-        return list;
-    }
+	        while (rs.next()) {
+	            Book b = new Book();
+	            b.setId(rs.getInt("id"));
+	            b.setTitle(rs.getString("title"));
+	            b.setAuthor(rs.getString("author"));
+	            b.setCategory(rs.getString("category"));
+	            b.setQuantity(rs.getInt("quantity"));
+	            list.add(b);
+	        }
+
+	        System.out.println("Số truyện lấy được: " + list.size());
+
+	        rs.close();
+	        ps.close();
+	        conn.close();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
 
     // Thêm truyện
     public void addBook(Book b) {
