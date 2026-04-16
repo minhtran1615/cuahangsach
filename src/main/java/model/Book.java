@@ -6,6 +6,8 @@ public class Book {
     private String author;
     private String category;
     private int quantity;
+    private int rentPricePerDay;
+    private String status;
 
     public Book() {}
 
@@ -31,4 +33,20 @@ public class Book {
 
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
+    
+    public int getRentPricePerDay() {
+        return rentPricePerDay;
+    }
+
+    public void setRentPricePerDay(int rentPricePerDay) {
+        this.rentPricePerDay = rentPricePerDay;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

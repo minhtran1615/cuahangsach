@@ -25,13 +25,18 @@ public class AddBookServlet extends HttpServlet {
         String title = req.getParameter("title");
         String author = req.getParameter("author");
         String category = req.getParameter("category");
+
         int quantity = Integer.parseInt(req.getParameter("quantity"));
+        int rentPricePerDay = Integer.parseInt(req.getParameter("rentPricePerDay"));
+        String status = req.getParameter("status");
 
         Book b = new Book();
         b.setTitle(title);
         b.setAuthor(author);
         b.setCategory(category);
         b.setQuantity(quantity);
+        b.setRentPricePerDay(rentPricePerDay);
+        b.setStatus(status);
 
         BookDAO dao = new BookDAO();
         dao.addBook(b);

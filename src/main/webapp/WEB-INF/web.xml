@@ -9,15 +9,5 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-    <!-- Customer List Servlet -->
-    <servlet>
-        <servlet-name>CustomerListServlet</servlet-name>
-        <servlet-class>main.CustomerListServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CustomerListServlet</servlet-name>
-        <url-pattern>/customers</url-pattern>
-    </servlet-mapping>
-
+   
 </web-app>

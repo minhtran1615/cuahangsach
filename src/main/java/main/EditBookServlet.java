@@ -34,7 +34,17 @@ public class EditBookServlet extends HttpServlet {
         String category = req.getParameter("category");
         int quantity = Integer.parseInt(req.getParameter("quantity"));
 
-        Book b = new Book(id, title, author, category, quantity);
+        int rentPricePerDay = Integer.parseInt(req.getParameter("rentPricePerDay"));
+        String status = req.getParameter("status");
+
+        Book b = new Book();
+        b.setId(id);
+        b.setTitle(title);
+        b.setAuthor(author);
+        b.setCategory(category);
+        b.setQuantity(quantity);
+        b.setRentPricePerDay(rentPricePerDay);
+        b.setStatus(status);
 
         BookDAO dao = new BookDAO();
         dao.updateBook(b);

@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.BookDAO;
+import dao.RentalReceiptDAO;
 
-@WebServlet("/deleteBook")
-public class DeleteBookServlet extends HttpServlet {
+@WebServlet("/deleteRentalReceipt")
+public class DeleteRentalReceiptServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -20,14 +21,15 @@ public class DeleteBookServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(req.getParameter("id"));
 
-            BookDAO dao = new BookDAO();
-            dao.deleteBook(id);
+            Connection conn = DBConnection.getConnection(); // lấy kết nối DB
+            RentalReceiptDAO dao = new RentalReceiptDAO(conn); // truyền conn vào DAO
+            dao.deleteRentalReceipt(id);
 
-            resp.sendRedirect(req.getContextPath() + "/books");
+            resp.sendRedirect(req.getContextPath() + "/rentalReceipts");
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().println("Loi khi xoa sach!");
+            resp.getWriter().println("Lỗi khi xóa phiếu thuê!");
         }
     }
 }

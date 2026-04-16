@@ -27,13 +27,9 @@ public class CustomerDAO {
             while (rs.next()) {
                 Customer c = new Customer();
 
-                // database của bạn dùng id
                 c.setCustomerId(rs.getInt("id"));
-
                 c.setFullname(rs.getString("fullname"));
                 c.setPhone(rs.getString("phone"));
-
-                // database của bạn dùng registerDate
                 c.setRegisterDate(rs.getDate("registerDate"));
 
                 list.add(c);
@@ -44,5 +40,40 @@ public class CustomerDAO {
         }
 
         return list;
+    }
+
+    public boolean deleteCustomer(int id) {
+        try {
+            String sql = "DELETE FROM customers WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            int rows = ps.executeUpdate();
+            return rows > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean insertCustomer(Customer c) {
+        try {
+            String sql = "INSERT INTO customers(fullname, phone, registerDate) VALUES (?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, c.getFullname());
+            ps.setString(2, c.getPhone());
+            ps.setDate(3, c.getRegisterDate()); // sửa chỗ này
+
+            int rows = ps.executeUpdate();
+            return rows > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

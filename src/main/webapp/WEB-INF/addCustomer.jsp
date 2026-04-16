@@ -1,15 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="model.Book" %>
-
-<%
-    Book b = (Book) request.getAttribute("book");
-%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sửa truyện</title>
+<title>Thêm khách hàng</title>
 
 <style>
     * {
@@ -75,25 +70,43 @@
     }
 
     input:focus {
-        border-color: #ff512f;
-        box-shadow: 0 0 8px rgba(255, 81, 47, 0.35);
+        border-color: #2575fc;
+        box-shadow: 0 0 8px rgba(37, 117, 252, 0.35);
         background: white;
         transform: scale(1.01);
     }
 
-    .btn {
-        width: 100%;
-        padding: 13px;
+    .btn-group {
         margin-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .btn {
+        flex: 1;
+        text-align: center;
+        padding: 12px;
         border: none;
         border-radius: 14px;
-        background: linear-gradient(135deg, #ffb347, #ff512f);
-        color: white;
-        font-size: 16px;
         font-weight: bold;
         cursor: pointer;
+        font-size: 15px;
         transition: 0.25s;
-        box-shadow: 0px 6px 18px rgba(255, 81, 47, 0.25);
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-back {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        box-shadow: 0px 6px 18px rgba(37, 117, 252, 0.25);
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #11998e, #38ef7d);
+        color: white;
+        box-shadow: 0px 6px 18px rgba(56, 239, 125, 0.25);
     }
 
     .btn:hover {
@@ -103,21 +116,6 @@
 
     .btn:active {
         transform: scale(0.98);
-    }
-
-    .back {
-        display: block;
-        text-align: center;
-        margin-top: 18px;
-        text-decoration: none;
-        font-weight: bold;
-        color: #2575fc;
-        transition: 0.25s;
-    }
-
-    .back:hover {
-        color: #6a11cb;
-        text-decoration: underline;
     }
 
     .note {
@@ -146,6 +144,10 @@
         h2 {
             font-size: 22px;
         }
+
+        .btn-group {
+            flex-direction: column;
+        }
     }
 </style>
 
@@ -154,38 +156,29 @@
 
 <div class="container">
 
-    <span class="icon">✏️</span>
-    <h2>SỬA THÔNG TIN TRUYỆN</h2>
+    <span class="icon">👤</span>
+    <h2>THÊM KHÁCH HÀNG</h2>
 
-    <form action="<%=request.getContextPath()%>/editBook" method="post">
+    <form action="<%=request.getContextPath()%>/addCustomer" method="post">
 
-        <input type="hidden" name="id" value="<%=b.getId()%>">
+        <label>📌 Họ tên</label>
+        <input type="text" name="fullname" required placeholder="Nhập họ tên khách hàng">
 
-        <label> Tên truyện</label>
-        <input type="text" name="title" value="<%=b.getTitle()%>" required>
+        <label>📞 Số điện thoại</label>
+        <input type="text" name="phone" required placeholder="Nhập số điện thoại">
 
-        <label> Tác giả</label>
-        <input type="text" name="author" value="<%=b.getAuthor()%>">
+        <label>📅 Ngày đăng kí</label>
+        <input type="date" name="registerDate" required>
 
-        <label> Thể loại</label>
-        <input type="text" name="category" value="<%=b.getCategory()%>">
+        <div class="btn-group">
+            <a class="btn btn-back" href="<%=request.getContextPath()%>/customers">⬅ Quay lại</a>
+            <button class="btn btn-save" type="submit">💾 Lưu khách hàng</button>
+        </div>
 
-        <label> Số lượng</label>
-        <input type="number" name="quantity" value="<%=b.getQuantity()%>" required min="0">
-
-        <label> Giá thuê/ngày (VNĐ)</label>
-        <input type="number" name="rentPricePerDay" value="<%=b.getRentPricePerDay()%>" required min="0">
-
-        <label> Tình trạng truyện</label>
-        <input type="text" name="status" value="<%=b.getStatus()%>" required>
-
-        <button type="submit" class="btn">💾 Cập nhật truyện</button>
     </form>
 
-    <a class="back" href="<%=request.getContextPath()%>/books">⬅ Quay lại danh sách</a>
-
     <div class="note">
-        Hãy kiểm tra thông tin trước khi cập nhật 📖
+        Vui lòng nhập đúng thông tin khách hàng để quản lý hiệu quả ✨
     </div>
 
 </div>

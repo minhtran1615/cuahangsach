@@ -31,6 +31,8 @@ public class BookDAO {
 	            b.setAuthor(rs.getString("author"));
 	            b.setCategory(rs.getString("category"));
 	            b.setQuantity(rs.getInt("quantity"));
+	            b.setRentPricePerDay(rs.getInt("rent_price_per_day"));
+	            b.setStatus(rs.getString("status"));
 	            list.add(b);
 	        }
 
@@ -118,14 +120,16 @@ public class BookDAO {
     public void updateBook(Book b) {
         try {
             Connection conn = DBConnection.getConnection();
-            String sql = "UPDATE books SET title=?, author=?, category=?, quantity=? WHERE id=?";
+            String sql = "UPDATE books SET title=?, author=?, category=?, quantity=?, rent_price_per_day=?, status=? WHERE id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, b.getTitle());
             ps.setString(2, b.getAuthor());
             ps.setString(3, b.getCategory());
             ps.setInt(4, b.getQuantity());
-            ps.setInt(5, b.getId());
+            ps.setInt(5, b.getRentPricePerDay());
+            ps.setString(6, b.getStatus());
+            ps.setInt(7, b.getId());
 
             ps.executeUpdate();
             conn.close();
